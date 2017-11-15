@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name=".OompaLoompaListActivity">
+        <activity android:name=".list.OompaLoompaListActivity">
             <intent-filter android:order="1">
                 <action android:name="android.intent.action.VIEW" />
 

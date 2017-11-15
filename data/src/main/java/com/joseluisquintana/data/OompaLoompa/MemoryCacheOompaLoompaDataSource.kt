@@ -13,7 +13,7 @@ class MemoryCacheOompaLoompaDataSource: CacheOompaLoompaDataSource {
     }
 
     override fun getOompaLoompas(page: Int): Single<List<OompaLoompa>> {
-        if (this.oompaLoompasList.containsKey(page)) {
+        if (!this.oompaLoompasList.containsKey(page)) {
             return Single.error<List<OompaLoompa>>(NoSuchElementException())
         }
 

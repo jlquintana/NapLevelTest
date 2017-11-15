@@ -13,7 +13,7 @@ class NetworkOompaLoompaDataSource(retrofit : Retrofit) : OompaLoompaDataSource 
     }
 
     override fun getOompaLoompas(page: Int): Single<List<OompaLoompa>> {
-        return restRestApi.getLoompas(page)
+        return restRestApi.getLoompas(page).map { response -> response.results }
     }
 
     override fun getOompaLoompa(id: Long): Single<OompaLoompa> {
@@ -22,7 +22,7 @@ class NetworkOompaLoompaDataSource(retrofit : Retrofit) : OompaLoompaDataSource 
 
     private interface OompaLoompaRestApi {
         @GET("oompa-loompas")
-        fun getLoompas(@Query("page") page: Int): Single<List<OompaLoompa>>
+        fun getLoompas(@Query("page") page: Int): Single<OompaLoompaListResponse>
 
 
         @GET("oompa-loompas/{id}")

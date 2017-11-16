@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.napptilustest.app.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_oompa_loompa.view.*
 
 class OompaLoompaListAdapter(val oompaLoompas: List<OompaLoompa>): RecyclerView.Adapter<OompaLoompaListAdapter.RowViewHolder>() {
@@ -27,7 +28,24 @@ class OompaLoompaListAdapter(val oompaLoompas: List<OompaLoompa>): RecyclerView.
     class RowViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
         fun bind(oompaLoompa: OompaLoompa) {
-            view.oompaLoompaNameTV.text = oompaLoompa.firstName
+            val context = view.context
+            Picasso.with(context)
+                    .load(oompaLoompa.image)
+                    .placeholder(R.drawable.no_avatar)
+                    .error(R.drawable.no_avatar)
+                    .into(view.imageIV)
+
+            view.nameTV.text = oompaLoompa.firstName + " " + oompaLoompa.lastName
+            view.profesionTV.text = oompaLoompa.profession
+            view.emailTV.text = oompaLoompa.email
+
+            if (oompaLoompa.gender != null && oompaLoompa.gender.equals("M")) {
+                view.genderTV.text = context.getText(R.string.male)
+            } else if (oompaLoompa.gender != null && oompaLoompa.gender.equals("F")) {
+                view.genderTV.text = context.getText(R.string.female)
+            } else {
+                view.genderTV.text = context.getText(R.string.unknown)
+            }
         }
     }
 }

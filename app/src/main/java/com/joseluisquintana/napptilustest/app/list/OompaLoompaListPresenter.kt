@@ -11,7 +11,7 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
     val TAG = "OompaLoompaListPresente"
     val oompaLoompas: ArrayList<OompaLoompa> = ArrayList<OompaLoompa>()
 
-    var currentPage: Int = 0;
+    var currentPage: Int = 1;
     var view: View? = null
     var gettingOompaLoompas = false
 
@@ -41,12 +41,12 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
 
         gettingOompaLoompas = true
         view?.showLoading()
-        currentPage++
         getOompaLoompaListUseCase.execute(currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
+                            currentPage++
                             this.oompaLoompas.addAll(it)
                             showOompaLoompas()
                         },

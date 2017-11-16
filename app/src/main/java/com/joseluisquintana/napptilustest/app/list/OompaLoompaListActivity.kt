@@ -7,6 +7,8 @@ import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -15,11 +17,13 @@ import com.joseluisquintana.napptilustest.app.R
 import com.joseluisquintana.napptilustest.app.application.MyApplication
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListComponent
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListModule
+import com.joseluisquintana.napptilustest.app.list.filter.FilterDialogFragment
 import kotlinx.android.synthetic.main.activity_oompa_loompa_list.*
 import javax.inject.Inject
 
 
-class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.View, OompaLoompaListAdapter.ItemClickListener {
+class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.View,
+        OompaLoompaListAdapter.ItemClickListener, FilterDialogFragment.OnFilterListener {
 
     private val Activity.app: MyApplication get() = application as MyApplication
 
@@ -69,6 +73,21 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
         return oompaLoompaListComponent
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.list_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.filter) {
+            val fm = fragmentManager
+            val dialogFragment = FilterDialogFragment()
+            dialogFragment.show(fm, "FilterDialogFragment")
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onOompaLoompaClicked(oompaLoompa: OompaLoompa, transitionImageView: ImageView) {
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, transitionImageView, ViewCompat
                 .getTransitionName(transitionImageView))
@@ -89,6 +108,10 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
 
     override fun showError() {
         Toast.makeText(this, "Something went wrong...", Toast.LENGTH_LONG).show()
+    }
+
+    override fun filter() {
+
     }
 }
 

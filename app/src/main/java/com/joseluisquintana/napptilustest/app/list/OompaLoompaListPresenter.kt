@@ -34,6 +34,10 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
         getNextOompaLoompasPage()
     }
 
+    fun onOompaLoompaClicked(oompaLoompa: OompaLoompa) {
+        view?.navigateToDetail(oompaLoompa)
+    }
+
     private fun getNextOompaLoompasPage() {
         if (gettingOompaLoompas) {
             return
@@ -74,5 +78,6 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
         fun hideLoading()
         fun showOompaLoompas(oompaLoompas: ArrayList<OompaLoompa>)
         fun showError()
+        fun navigateToDetail(oompaLoompa: OompaLoompa)
     }
 }

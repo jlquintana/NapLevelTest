@@ -9,7 +9,8 @@ import com.joseluisquintana.napptilustest.app.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_oompa_loompa.view.*
 
-class OompaLoompaListAdapter: RecyclerView.Adapter<OompaLoompaListAdapter.RowViewHolder>() {
+class OompaLoompaListAdapter(val listener: OompaLoompaListAdapter.ItemClickListener):
+        RecyclerView.Adapter<OompaLoompaListAdapter.RowViewHolder>() {
 
     private var oompaLoompas: List<OompaLoompa>? = null
 
@@ -25,7 +26,7 @@ class OompaLoompaListAdapter: RecyclerView.Adapter<OompaLoompaListAdapter.RowVie
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RowViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
-        return RowViewHolder(layoutInflater.inflate(R.layout.row_oompa_loompa, parent, false))
+        return RowViewHolder(layoutInflater.inflate(R.layout.row_oompa_loompa, parent, false), listener)
     }
 
     override fun onBindViewHolder(holder: RowViewHolder?, position: Int) {
@@ -36,7 +37,7 @@ class OompaLoompaListAdapter: RecyclerView.Adapter<OompaLoompaListAdapter.RowVie
         return this.oompaLoompas?.size ?: 0
     }
 
-    class RowViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+    class RowViewHolder(val view: View, val listener: OompaLoompaListAdapter.ItemClickListener): RecyclerView.ViewHolder(view) {
 
         fun bind(oompaLoompa: OompaLoompa?) {
             val context = view.context
@@ -57,6 +58,16 @@ class OompaLoompaListAdapter: RecyclerView.Adapter<OompaLoompaListAdapter.RowVie
             } else {
                 view.genderTV.text = context.getText(R.string.unknown)
             }
+
+            view.setOnClickListener {
+                if (oompaLoompa != null) {
+                    listener.onOompaLoompaClicked(oompaLoompa)
+                }
+            }
         }
+    }
+
+    interface ItemClickListener {
+        fun onOompaLoompaClicked(oompaLoompa: OompaLoompa)
     }
 }

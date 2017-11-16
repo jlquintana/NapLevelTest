@@ -3,9 +3,11 @@ package com.joseluisquintana.napptilustest.app.list
 import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.napptilustest.app.MyApplication
 import com.joseluisquintana.napptilustest.app.R
+import kotlinx.android.synthetic.main.activity_oompa_loompa_list.*
 import javax.inject.Inject
 
 class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.View {
@@ -25,6 +27,8 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
     override fun onResume() {
         super.onResume()
 
+        listRV.layoutManager = LinearLayoutManager(this)
+
         presenter.onViewReady(this)
     }
 
@@ -43,7 +47,7 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
     }
 
     override fun showOompaLoompas(oompaLoompas: ArrayList<OompaLoompa>) {
-
+        listRV.adapter = OompaLoompaListAdapter(oompaLoompas)
     }
 
     override fun showError() {

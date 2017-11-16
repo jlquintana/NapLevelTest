@@ -19,8 +19,9 @@ android {
 }
 
 dependencies {
-    api 'com.android.support:appcompat-v7:26.1.0'
-    api 'com.android.support.constraint:constraint-layout:1.0.2'
+    def PLAY_SERVICES_VERSION = '26.1.0'
+    api "com.android.support:appcompat-v7:${PLAY_SERVICES_VERSION}"
+
     application project(':app')
     feature project(':app')
 }

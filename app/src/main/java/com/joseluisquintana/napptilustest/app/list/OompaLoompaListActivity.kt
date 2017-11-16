@@ -8,10 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Toast
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
-import com.joseluisquintana.napptilustest.app.MyApplication
+import com.joseluisquintana.napptilustest.app.application.MyApplication
 import com.joseluisquintana.napptilustest.app.R
-import com.joseluisquintana.napptilustest.app.di.OompaLoompaListComponent
-import com.joseluisquintana.napptilustest.app.di.OompaLoompaListModule
+import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListComponent
+import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListModule
 import kotlinx.android.synthetic.main.activity_oompa_loompa_list.*
 import javax.inject.Inject
 

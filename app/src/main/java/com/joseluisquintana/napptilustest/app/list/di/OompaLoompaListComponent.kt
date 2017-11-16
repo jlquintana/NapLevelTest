@@ -1,6 +1,5 @@
-package com.joseluisquintana.napptilustest.app.di
+package com.joseluisquintana.napptilustest.app.list.di
 
-import com.joseluisquintana.napptilustest.app.di.scopes.OompaLoompaListScope
 import com.joseluisquintana.napptilustest.app.list.OompaLoompaListActivity
 import dagger.Subcomponent
 

@@ -1,4 +1,4 @@
-package com.joseluisquintana.napptilustest.app.di.scopes
+package com.joseluisquintana.napptilustest.app.list.di
 
 import javax.inject.Scope
 

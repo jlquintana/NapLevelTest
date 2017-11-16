@@ -1,6 +1,7 @@
-package com.joseluisquintana.napptilustest.app.di
+package com.joseluisquintana.napptilustest.app.application.di
 
-import com.joseluisquintana.napptilustest.app.di.scopes.ApplicationScope
+import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListComponent
+import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListModule
 import dagger.Component
 
 @ApplicationScope

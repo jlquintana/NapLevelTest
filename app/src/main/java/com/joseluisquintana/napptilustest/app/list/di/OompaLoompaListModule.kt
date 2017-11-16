@@ -1,8 +1,7 @@
-package com.joseluisquintana.napptilustest.app.di
+package com.joseluisquintana.napptilustest.app.list.di
 
 import com.joseluisquintana.data.OompaLoompa.OompaLoompaRepository
 import com.joseluisquintana.domain.GetOompaLoompaListUseCase
-import com.joseluisquintana.napptilustest.app.di.scopes.OompaLoompaListScope
 import com.joseluisquintana.napptilustest.app.list.OompaLoompaListPresenter
 import dagger.Module
 import dagger.Provides

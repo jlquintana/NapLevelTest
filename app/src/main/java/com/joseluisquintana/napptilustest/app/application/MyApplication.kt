@@ -1,9 +1,9 @@
-package com.joseluisquintana.napptilustest.app
+package com.joseluisquintana.napptilustest.app.application
 
 import android.app.Application
-import com.joseluisquintana.napptilustest.app.di.AppComponent
-import com.joseluisquintana.napptilustest.app.di.AppModule
-import com.joseluisquintana.napptilustest.app.di.DaggerAppComponent
+import com.joseluisquintana.napptilustest.app.application.di.AppComponent
+import com.joseluisquintana.napptilustest.app.application.di.AppModule
+import com.joseluisquintana.napptilustest.app.application.di.DaggerAppComponent
 
 class MyApplication : Application() {
 

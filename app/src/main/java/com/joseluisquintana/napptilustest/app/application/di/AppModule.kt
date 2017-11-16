@@ -1,9 +1,8 @@
-package com.joseluisquintana.napptilustest.app.di
+package com.joseluisquintana.napptilustest.app.application.di
 
 import android.app.Application
 import android.content.Context
-import com.joseluisquintana.napptilustest.app.MyApplication
-import com.joseluisquintana.napptilustest.app.di.scopes.ApplicationScope
+import com.joseluisquintana.napptilustest.app.application.MyApplication
 import dagger.Module
 import dagger.Provides
 

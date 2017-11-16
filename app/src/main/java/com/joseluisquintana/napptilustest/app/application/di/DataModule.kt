@@ -1,10 +1,9 @@
-package com.joseluisquintana.napptilustest.app.di
+package com.joseluisquintana.napptilustest.app.application.di
 
 import com.joseluisquintana.data.OompaLoompa.CacheOompaLoompaDataSource
 import com.joseluisquintana.data.OompaLoompa.MemoryCacheOompaLoompaDataSource
 import com.joseluisquintana.data.OompaLoompa.NetworkOompaLoompaDataSource
 import com.joseluisquintana.data.OompaLoompa.OompaLoompaRepository
-import com.joseluisquintana.napptilustest.app.di.scopes.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

@@ -49,7 +49,7 @@ class OompaLoompaListAdapter(val listener: OompaLoompaListAdapter.ItemClickListe
                     .into(view.imageIV)
 
             view.nameTV.text = oompaLoompa?.firstName + " " + oompaLoompa?.lastName
-            view.profesionTV.text = oompaLoompa?.profession
+            view.professionTV.text = oompaLoompa?.profession
             view.emailTV.text = oompaLoompa?.email
 
             if (oompaLoompa?.gender != null && oompaLoompa.gender.equals("M")) {

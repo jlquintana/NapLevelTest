@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.napptilustest.app.R
 import com.joseluisquintana.napptilustest.app.application.MyApplication
@@ -61,20 +62,11 @@ class OompaLoompaDetailActivity : AppCompatActivity(), OompaLoompaDetailPresente
         return oompaLoompaDetailComponent
     }
 
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
-
-    }
-
     override fun showError() {
-
+        Toast.makeText(this, "Something went wrong...", Toast.LENGTH_LONG).show()
     }
 
     override fun showOompaLoompa(oompaLoompa: OompaLoompa?) {
-        nameTV.text = oompaLoompa?.firstName + " " + oompaLoompa?.lastName
         Picasso.with(this)
                 .load(oompaLoompa?.image)
                 .placeholder(R.drawable.no_avatar)
@@ -88,5 +80,18 @@ class OompaLoompaDetailActivity : AppCompatActivity(), OompaLoompaDetailPresente
                         supportStartPostponedEnterTransition();
                     }
                 });
+
+        nameTV.text = oompaLoompa?.firstName + " " + oompaLoompa?.lastName
+        professionTV.text = oompaLoompa?.profession
+        emailTV.text = oompaLoompa?.email
+        descriptionTV.text = oompaLoompa?.description
+
+        if (oompaLoompa?.gender != null && oompaLoompa.gender.equals("M")) {
+            genderTV.text = getText(R.string.male)
+        } else if (oompaLoompa?.gender != null && oompaLoompa.gender.equals("F")) {
+            genderTV.text = getText(R.string.female)
+        } else {
+            genderTV.text = getText(R.string.unknown)
+        }
     }
 }

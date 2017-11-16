@@ -6,8 +6,8 @@ import com.joseluisquintana.domain.GetOompaLoompaDetailUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class OompaLoompaDetailPresenter(val oompaLoompaPreview: OompaLoompa?, val getOompaLoompaDetailUseCase:
-GetOompaLoompaDetailUseCase) {
+class OompaLoompaDetailPresenter(val oompaLoompaPreview: OompaLoompa?,
+                                 val getOompaLoompaDetailUseCase: GetOompaLoompaDetailUseCase) {
 
     val TAG = "OompaLoompaDetailPresenter"
     var oompaLoompa: OompaLoompa? = null;
@@ -32,7 +32,6 @@ GetOompaLoompaDetailUseCase) {
             return
         }
 
-        view?.showLoading()
         getOompaLoompaDetailUseCase.execute(oompaLoompaPreview.id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -49,18 +48,14 @@ GetOompaLoompaDetailUseCase) {
     }
 
     private fun showError() {
-        view?.hideLoading()
         view?.showError()
     }
 
     private fun showOompaLoompaDetail() {
-        view?.hideLoading()
         view?.showOompaLoompa(oompaLoompa ?: oompaLoompaPreview)
     }
 
     interface View {
-        fun showLoading()
-        fun hideLoading()
         fun showError()
         fun showOompaLoompa(oompaLoompa: OompaLoompa?)
     }

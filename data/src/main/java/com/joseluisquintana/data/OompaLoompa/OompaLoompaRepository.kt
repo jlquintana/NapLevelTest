@@ -7,13 +7,20 @@ class OompaLoompaRepository(val externalDataSource: OompaLoompaDataSource,
 
     fun getOompaLoompas(page: Int): Single<List<OompaLoompa>> {
         return this.cacheOompaLoompaDataSource.getOompaLoompas(page)
-                .doOnSuccess { oompaLoompas -> cacheOompaLoompaDataSource.updateOompaLoompaList(page, oompaLoompas) }
-                .onErrorResumeNext(externalDataSource.getOompaLoompas(page))
+                .onErrorResumeNext(
+                        externalDataSource.getOompaLoompas(page)
+                            .doOnSuccess { cacheOompaLoompaDataSource.updateOompaLoompaList(page, it) }
+                )
     }
 
     fun getOompaLoompa(id: Long): Single<OompaLoompa> {
         return this.cacheOompaLoompaDataSource.getOompaLoompa(id)
-                .doOnSuccess { oompaLoompa -> cacheOompaLoompaDataSource.updateOompaLoompa(oompaLoompa) }
-                .onErrorResumeNext(externalDataSource.getOompaLoompa(id))
+                .onErrorResumeNext(
+                        externalDataSource.getOompaLoompa(id)
+                            // Oompa Loompa models that come from backend has no ID, so we must add the id to the model
+                            // in order to store it into cache
+                            .map { it.id = id; it }
+                            .doOnSuccess { cacheOompaLoompaDataSource.updateOompaLoompa(it) }
+                )
     }
 }

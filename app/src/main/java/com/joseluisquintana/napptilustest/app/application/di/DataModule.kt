@@ -18,6 +18,7 @@ class DataModule {
 
     val BASE_URL = "https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/"
 
+    @ApplicationScope
     @Provides
     internal fun providesRetrofit(): Retrofit {
         val interceptor = HttpLoggingInterceptor()
@@ -34,17 +35,20 @@ class DataModule {
                 .build();
     }
 
+    @ApplicationScope
     @Provides
     internal fun provideOompaLoompaRepository(networkDataSource: NetworkOompaLoompaDataSource,
                                               cacheDataSource: CacheOompaLoompaDataSource): OompaLoompaRepository {
         return OompaLoompaRepository(networkDataSource, cacheDataSource)
     }
 
+    @ApplicationScope
     @Provides
     internal fun providesNetworkOompaLoompaDataSource(retrofit: Retrofit): NetworkOompaLoompaDataSource {
         return NetworkOompaLoompaDataSource(retrofit)
     }
 
+    @ApplicationScope
     @Provides
     internal fun providesCacheOompaLoompaDataSource(): CacheOompaLoompaDataSource {
         return MemoryCacheOompaLoompaDataSource()

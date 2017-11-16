@@ -10,6 +10,8 @@ import android.widget.Toast
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.napptilustest.app.MyApplication
 import com.joseluisquintana.napptilustest.app.R
+import com.joseluisquintana.napptilustest.app.di.OompaLoompaListComponent
+import com.joseluisquintana.napptilustest.app.di.OompaLoompaListModule
 import kotlinx.android.synthetic.main.activity_oompa_loompa_list.*
 import javax.inject.Inject
 
@@ -20,7 +22,9 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
     private val oompaLoompaListAdapter = OompaLoompaListAdapter()
     private val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(this)
 
-    @Inject lateinit var presenter: OompaLoompaListPresenter
+    @Inject
+    lateinit var presenter: OompaLoompaListPresenter
+    lateinit var oompaLoompaListComponent: OompaLoompaListComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +42,10 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
             }
         })
 
-        app.appComponent
-                .inject(this)
+        oompaLoompaListComponent = lastCustomNonConfigurationInstance as OompaLoompaListComponent?
+                ?: app.appComponent.plus(OompaLoompaListModule())
+
+        oompaLoompaListComponent.inject(this)
     }
 
     override fun onResume() {
@@ -52,6 +58,10 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
         super.onPause()
 
         presenter.onViewDestroyed()
+    }
+
+    override fun onRetainCustomNonConfigurationInstance(): Any {
+        return oompaLoompaListComponent
     }
 
     override fun showLoading() {

@@ -13,6 +13,7 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
 
     var currentPage: Int = 0;
     var view: View? = null
+    var gettingOompaLoompas = false
 
     init {
         getNextOompaLoompasPage()
@@ -34,6 +35,11 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
     }
 
     private fun getNextOompaLoompasPage() {
+        if (gettingOompaLoompas) {
+            return
+        }
+
+        gettingOompaLoompas = true
         view?.showLoading()
         currentPage++
         getOompaLoompaListUseCase.execute(currentPage)
@@ -52,10 +58,13 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
     }
 
     private fun showError() {
+        gettingOompaLoompas = false
+        view?.hideLoading()
         view?.showError()
     }
 
     private fun showOompaLoompas() {
+        gettingOompaLoompas = false
         view?.hideLoading()
         view?.showOompaLoompas(oompaLoompas)
     }

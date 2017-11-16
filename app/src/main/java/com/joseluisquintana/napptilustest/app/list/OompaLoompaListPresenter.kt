@@ -1,8 +1,11 @@
 package com.joseluisquintana.napptilustest.app.list
 
+import android.content.Context
+import android.support.v4.app.ActivityOptionsCompat
 import android.util.Log
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.domain.GetOompaLoompaListUseCase
+import com.joseluisquintana.napptilustest.app.detail.OompaLoompaDetailActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -34,8 +37,9 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
         getNextOompaLoompasPage()
     }
 
-    fun onOompaLoompaClicked(oompaLoompa: OompaLoompa) {
-        view?.navigateToDetail(oompaLoompa)
+    fun onOompaLoompaClicked(context: Context, oompaLoompa: OompaLoompa, options: ActivityOptionsCompat) {
+        val detailIntent = OompaLoompaDetailActivity.newIntent(context, oompaLoompa)
+        context.startActivity(detailIntent, options.toBundle())
     }
 
     private fun getNextOompaLoompasPage() {
@@ -78,6 +82,5 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
         fun hideLoading()
         fun showOompaLoompas(oompaLoompas: ArrayList<OompaLoompa>)
         fun showError()
-        fun navigateToDetail(oompaLoompa: OompaLoompa)
     }
 }

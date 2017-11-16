@@ -10,6 +10,7 @@ import com.joseluisquintana.napptilustest.app.R
 import com.joseluisquintana.napptilustest.app.application.MyApplication
 import com.joseluisquintana.napptilustest.app.detail.di.OompaLoompaDetailComponent
 import com.joseluisquintana.napptilustest.app.detail.di.OompaLoompaDetailModule
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_oompa_loompa_detail.*
 import javax.inject.Inject
@@ -36,7 +37,7 @@ class OompaLoompaDetailActivity : AppCompatActivity(), OompaLoompaDetailPresente
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_oompa_loompa_detail)
-
+        supportPostponeEnterTransition();
 
         oompaLoompaDetailComponent = lastCustomNonConfigurationInstance as OompaLoompaDetailComponent?
                 ?: app.appComponent.plus(OompaLoompaDetailModule(intent.getParcelableExtra<OompaLoompa?>(ARG_OOMPA)))
@@ -78,6 +79,14 @@ class OompaLoompaDetailActivity : AppCompatActivity(), OompaLoompaDetailPresente
                 .load(oompaLoompa?.image)
                 .placeholder(R.drawable.no_avatar)
                 .error(R.drawable.no_avatar)
-                .into(imageIV)
+                .into(imageIV, object : Callback {
+                    override fun onSuccess() {
+                        supportStartPostponedEnterTransition();
+                    }
+
+                    override fun onError() {
+                        supportStartPostponedEnterTransition();
+                    }
+                });
     }
 }

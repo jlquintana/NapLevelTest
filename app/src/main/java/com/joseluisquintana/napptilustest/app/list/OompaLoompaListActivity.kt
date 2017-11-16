@@ -2,19 +2,22 @@ package com.joseluisquintana.napptilustest.app.list
 
 import android.app.Activity
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.napptilustest.app.R
 import com.joseluisquintana.napptilustest.app.application.MyApplication
-import com.joseluisquintana.napptilustest.app.detail.OompaLoompaDetailActivity
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListComponent
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListModule
 import kotlinx.android.synthetic.main.activity_oompa_loompa_list.*
 import javax.inject.Inject
+
 
 class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.View, OompaLoompaListAdapter.ItemClickListener {
 
@@ -66,8 +69,10 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
         return oompaLoompaListComponent
     }
 
-    override fun onOompaLoompaClicked(oompaLoompa: OompaLoompa) {
-        presenter.onOompaLoompaClicked(oompaLoompa)
+    override fun onOompaLoompaClicked(oompaLoompa: OompaLoompa, transitionImageView: ImageView) {
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, transitionImageView, ViewCompat
+                .getTransitionName(transitionImageView))
+        presenter.onOompaLoompaClicked(this, oompaLoompa, options)
     }
 
     override fun showLoading() {
@@ -84,11 +89,6 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
 
     override fun showError() {
         Toast.makeText(this, "Something went wrong...", Toast.LENGTH_LONG).show()
-    }
-
-    override fun navigateToDetail(oompaLoompa: OompaLoompa) {
-        val detailIntent = OompaLoompaDetailActivity.newIntent(this, oompaLoompa)
-        startActivity(detailIntent)
     }
 }
 

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.napptilustest.app.R
 import com.squareup.picasso.Picasso
@@ -61,13 +62,13 @@ class OompaLoompaListAdapter(val listener: OompaLoompaListAdapter.ItemClickListe
 
             view.setOnClickListener {
                 if (oompaLoompa != null) {
-                    listener.onOompaLoompaClicked(oompaLoompa)
+                    listener.onOompaLoompaClicked(oompaLoompa, view.imageIV)
                 }
             }
         }
     }
 
     interface ItemClickListener {
-        fun onOompaLoompaClicked(oompaLoompa: OompaLoompa)
+        fun onOompaLoompaClicked(oompaLoompa: OompaLoompa, transitionImageView: ImageView)
     }
 }

@@ -10,6 +10,7 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageIV"
+        android:transitionName="image"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="10dp"

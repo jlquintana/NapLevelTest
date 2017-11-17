@@ -44,11 +44,8 @@ class FilterDialogFragment : DialogFragment() {
     }
 
     private fun onClosePressed() {
-        if (mListener == null) {
-            return
-        }
-
-        mListener!!.filter(createFilter())
+        mListener?.filter(createFilter())
+        mListener = null
         dismiss()
     }
 

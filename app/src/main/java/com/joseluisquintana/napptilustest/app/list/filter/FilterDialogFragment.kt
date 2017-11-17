@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.joseluisquintana.domain.Filter
 import com.joseluisquintana.napptilustest.app.R
 import kotlinx.android.synthetic.main.fragment_filter_dialog.view.*
 
@@ -49,8 +50,8 @@ class FilterDialogFragment : DialogFragment() {
         dismiss()
     }
 
-    private fun createFilter(): FilterModel {
-        return FilterModel(
+    private fun createFilter(): Filter {
+        return Filter(
             view?.maleCB?.isChecked ?: false,
             view?.femaleCB?.isChecked ?: false,
             view?.developerCB?.isChecked ?: false,
@@ -62,6 +63,6 @@ class FilterDialogFragment : DialogFragment() {
     }
 
     interface OnFilterListener {
-        fun filter(filter: FilterModel)
+        fun filter(filter: Filter)
     }
 }

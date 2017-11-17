@@ -13,12 +13,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
+import com.joseluisquintana.domain.Filter
 import com.joseluisquintana.napptilustest.app.R
 import com.joseluisquintana.napptilustest.app.application.MyApplication
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListComponent
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListModule
 import com.joseluisquintana.napptilustest.app.list.filter.FilterDialogFragment
-import com.joseluisquintana.napptilustest.app.list.filter.FilterModel
 import kotlinx.android.synthetic.main.activity_oompa_loompa_list.*
 import javax.inject.Inject
 
@@ -115,7 +115,7 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
         Toast.makeText(this, "Something went wrong...", Toast.LENGTH_LONG).show()
     }
 
-    override fun filter(filter: FilterModel) {
+    override fun filter(filter: Filter) {
         presenter.onFilter(filter)
     }
 }

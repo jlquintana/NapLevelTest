@@ -1,6 +1,6 @@
-package com.joseluisquintana.napptilustest.app.list.filter
+package com.joseluisquintana.domain
 
-data class FilterModel (
+data class Filter(
         val male: Boolean,
         val female: Boolean,
         val developer: Boolean,

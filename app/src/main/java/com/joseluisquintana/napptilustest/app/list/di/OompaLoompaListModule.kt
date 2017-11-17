@@ -1,6 +1,7 @@
 package com.joseluisquintana.napptilustest.app.list.di
 
 import com.joseluisquintana.data.OompaLoompa.OompaLoompaRepository
+import com.joseluisquintana.domain.FilterOompaLoompasUseCase
 import com.joseluisquintana.domain.GetOompaLoompaListUseCase
 import com.joseluisquintana.napptilustest.app.list.OompaLoompaListPresenter
 import dagger.Module
@@ -18,7 +19,15 @@ class OompaLoompaListModule {
 
     @OompaLoompaListScope
     @Provides
-    internal fun providesOompaLoompaListPresenter(getOompaLoompaListUseCase: GetOompaLoompaListUseCase): OompaLoompaListPresenter {
-        return OompaLoompaListPresenter(getOompaLoompaListUseCase)
+    internal fun providesFilterOompaLoompasUseCase(): FilterOompaLoompasUseCase {
+        return FilterOompaLoompasUseCase()
+    }
+
+    @OompaLoompaListScope
+    @Provides
+    internal fun providesOompaLoompaListPresenter(getOompaLoompaListUseCase: GetOompaLoompaListUseCase,
+                                                  filterOompaLoompasUseCase: FilterOompaLoompasUseCase)
+            : OompaLoompaListPresenter {
+        return OompaLoompaListPresenter(getOompaLoompaListUseCase, filterOompaLoompasUseCase)
     }
 }

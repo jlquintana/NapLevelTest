@@ -18,6 +18,7 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
     var currentPage: Int = 1;
     var view: View? = null
     var gettingOompaLoompas = false
+    var filter: FilterModel = FilterModel(true, true, true, true, true, true, true)
 
     init {
         getNextOompaLoompasPage()
@@ -75,17 +76,59 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
     private fun showOompaLoompas() {
         gettingOompaLoompas = false
         view?.hideLoading()
-        view?.showOompaLoompas(oompaLoompas)
+        view?.showOompaLoompas(oompaLoompas
+                .filter { shouldFilter(it) })
+    }
+
+    private fun shouldFilter(it: OompaLoompa): Boolean {
+        val genderFilterEmpty = !filter.male && !filter.female
+        if (!genderFilterEmpty) {
+            if (!filter.male && it.gender?.equals("M") ?: false) {
+                return false
+            }
+            if (!filter.female && it.gender?.equals("F") ?: false) {
+                return false
+            }
+        }
+
+        val professionFilterEmpty = !filter.developer
+                && !filter.metalworker
+                && !filter.brewer
+                && !filter.gemcutter
+                && !filter.medic
+
+        if (!professionFilterEmpty) {
+            if (!filter.developer && it.profession?.equals("Developer") ?: false) {
+                return false
+            }
+            if (!filter.metalworker && it.profession?.equals("Metalworker") ?: false) {
+                return false
+            }
+            if (!filter.brewer && it.profession?.equals("Brewer") ?: false) {
+                return false
+            }
+            if (!filter.gemcutter && it.profession?.equals("Gemcutter") ?: false) {
+                return false
+            }
+            if (!filter.medic && it.profession?.equals("Medic") ?: false) {
+                return false
+            }
+        }
+
+        return true
     }
 
     fun onFilter(filter: FilterModel) {
-
+        this.filter = filter
+        view?.removeOompaLoompaList()
+        showOompaLoompas()
     }
 
     interface View {
         fun showLoading()
         fun hideLoading()
-        fun showOompaLoompas(oompaLoompas: ArrayList<OompaLoompa>)
+        fun showOompaLoompas(oompaLoompas: List<OompaLoompa>)
         fun showError()
+        fun removeOompaLoompaList()
     }
 }

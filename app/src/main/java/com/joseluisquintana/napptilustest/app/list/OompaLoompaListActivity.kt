@@ -103,8 +103,12 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
         loadingView.visibility = View.GONE
     }
 
-    override fun showOompaLoompas(oompaLoompas: ArrayList<OompaLoompa>) {
+    override fun showOompaLoompas(oompaLoompas: List<OompaLoompa>) {
         oompaLoompaListAdapter.updateList(oompaLoompas)
+    }
+
+    override fun removeOompaLoompaList() {
+        oompaLoompaListAdapter.clearList()
     }
 
     override fun showError() {

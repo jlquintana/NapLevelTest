@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.row_oompa_loompa.view.*
 class OompaLoompaListAdapter(val listener: OompaLoompaListAdapter.ItemClickListener):
         RecyclerView.Adapter<OompaLoompaListAdapter.RowViewHolder>() {
 
-    private var oompaLoompas: List<OompaLoompa>? = null
+    private var oompaLoompas: MutableList<OompaLoompa>? = null
 
     fun updateList(oompaLoompas: List<OompaLoompa>) {
         val oldListSize = this.oompaLoompas?.size ?: 0
@@ -23,6 +23,11 @@ class OompaLoompaListAdapter(val listener: OompaLoompaListAdapter.ItemClickListe
         this.oompaLoompas = ArrayList<OompaLoompa>(oompaLoompas)
 
         notifyItemRangeInserted(oldListSize, rowsInserted)
+    }
+
+    fun clearList() {
+        oompaLoompas?.clear()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RowViewHolder {

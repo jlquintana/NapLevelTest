@@ -18,6 +18,7 @@ import com.joseluisquintana.napptilustest.app.application.MyApplication
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListComponent
 import com.joseluisquintana.napptilustest.app.list.di.OompaLoompaListModule
 import com.joseluisquintana.napptilustest.app.list.filter.FilterDialogFragment
+import com.joseluisquintana.napptilustest.app.list.filter.FilterModel
 import kotlinx.android.synthetic.main.activity_oompa_loompa_list.*
 import javax.inject.Inject
 
@@ -110,8 +111,8 @@ class OompaLoompaListActivity : AppCompatActivity(), OompaLoompaListPresenter.Vi
         Toast.makeText(this, "Something went wrong...", Toast.LENGTH_LONG).show()
     }
 
-    override fun filter() {
-
+    override fun filter(filter: FilterModel) {
+        presenter.onFilter(filter)
     }
 }
 

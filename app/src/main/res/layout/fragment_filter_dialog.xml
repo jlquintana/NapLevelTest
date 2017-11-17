@@ -1,15 +1,129 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context="com.joseluisquintana.napptilustest.app.list.filter.FilterDialogFragment"
     >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                />
+
+            <CheckBox
+                android:id="@+id/maleCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                />
+
+            <CheckBox
+                android:id="@+id/femaleCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="60dp"
+            android:layout_height="0dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Professsion"
+                />
+
+            <CheckBox
+                android:id="@+id/developerCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Developer"
+                />
+
+            <CheckBox
+                android:id="@+id/metalworkerCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Metalworker"
+                />
+
+            <CheckBox
+                android:id="@+id/brewerCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brewer"
+                />
+
+            <CheckBox
+                android:id="@+id/gemcutterCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gemcutter"
+                />
+
+            <CheckBox
+                android:id="@+id/medicCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medic"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="end"
+        >
+
+        <Button
+            style="@android:style/Widget.Material.ActionButton.CloseMode"
+            android:id="@+id/cancelB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="Cancel"
+            />
+
+        <Button
+            style="@android:style/Widget.Material.ActionButton.CloseMode"
+            android:id="@+id/closeB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="Close"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

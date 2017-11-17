@@ -6,6 +6,7 @@ import android.util.Log
 import com.joseluisquintana.data.OompaLoompa.OompaLoompa
 import com.joseluisquintana.domain.GetOompaLoompaListUseCase
 import com.joseluisquintana.napptilustest.app.detail.OompaLoompaDetailActivity
+import com.joseluisquintana.napptilustest.app.list.filter.FilterModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -75,6 +76,10 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
         gettingOompaLoompas = false
         view?.hideLoading()
         view?.showOompaLoompas(oompaLoompas)
+    }
+
+    fun onFilter(filter: FilterModel) {
+
     }
 
     interface View {

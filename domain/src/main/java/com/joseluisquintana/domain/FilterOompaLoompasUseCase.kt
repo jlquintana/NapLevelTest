@@ -7,13 +7,14 @@ class FilterOompaLoompasUseCase {
 
     fun execute(oompaLoompas: List<OompaLoompa>, filter: Filter): Single<List<OompaLoompa>> {
         return Single.fromCallable {
-            oompaLoompas
-                    .filter { shouldFilter(filter, it) }
+            oompaLoompas.filter { shouldFilter(filter, it) }
         }
     }
 
     private fun shouldFilter(filter: Filter, oompaLoompa: OompaLoompa): Boolean {
         val genderFilterEmpty = !filter.male && !filter.female
+
+        // Filter by gender only when there are one or more filtered options.
         if (!genderFilterEmpty) {
             if (!filter.male && oompaLoompa.gender?.equals("M") ?: false) {
                 return false
@@ -29,6 +30,7 @@ class FilterOompaLoompasUseCase {
                 && !filter.gemcutter
                 && !filter.medic
 
+        // Filter by profession only when there are one or more filtered options.
         if (!professionFilterEmpty) {
             if (!filter.developer && oompaLoompa.profession?.equals("Developer") ?: false) {
                 return false

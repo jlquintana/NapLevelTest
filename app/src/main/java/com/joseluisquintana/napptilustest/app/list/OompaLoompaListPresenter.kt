@@ -77,6 +77,8 @@ class OompaLoompaListPresenter(val getOompaLoompaListUseCase: GetOompaLoompaList
 
     private fun showOompaLoompas() {
         gettingOompaLoompas = false
+
+        // We do not change thread because the cost of changing thread is higher than the cost of filter computation.
         filterOompaLoompasUseCase.execute(oompaLoompas, filter)
                 .subscribe(
                         {

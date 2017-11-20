@@ -21,9 +21,9 @@ class NetworkOompaLoompaDataSource(retrofit : Retrofit) : OompaLoompaDataSource 
     }
 
     private interface OompaLoompaRestApi {
+
         @GET("oompa-loompas")
         fun getLoompas(@Query("page") page: Int): Single<OompaLoompaListResponse>
-
 
         @GET("oompa-loompas/{id}")
         fun getLoompa(@Path("id") id : Long): Single<OompaLoompa>

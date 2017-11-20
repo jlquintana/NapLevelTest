@@ -1,6 +1,6 @@
 package com.joseluisquintana.data.OompaLoompa
 
-class OompaLoompaListResponse (
+data class OompaLoompaListResponse (
     val current: Int,
     val total: Int,
     val results: List<OompaLoompa>

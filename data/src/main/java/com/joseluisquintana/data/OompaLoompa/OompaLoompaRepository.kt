@@ -6,10 +6,14 @@ class OompaLoompaRepository(val externalDataSource: OompaLoompaDataSource,
                             val cacheOompaLoompaDataSource: CacheOompaLoompaDataSource) {
 
     fun getOompaLoompas(page: Int): Single<List<OompaLoompa>> {
+        // Try to obtain the data in cache
         return this.cacheOompaLoompaDataSource.getOompaLoompas(page)
+                // If not into cache
                 .onErrorResumeNext(
+                        // Try to obtain the data using network
                         externalDataSource.getOompaLoompas(page)
-                            .doOnSuccess { cacheOompaLoompaDataSource.updateOompaLoompaList(page, it) }
+                                // Then save the response into cache
+                                .doOnSuccess { cacheOompaLoompaDataSource.updateOompaLoompaList(page, it) }
                 )
     }
 

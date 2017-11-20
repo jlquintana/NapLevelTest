@@ -1,4 +1,4 @@
-apply plugin: 'com.android.feature'
+apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
@@ -34,9 +34,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation project(':base')
 
     api project(':domain')
+
+    api "com.android.support:appcompat-v7:${PLAY_SERVICES_VERSION}"
 
     // RecyclerView
     api "com.android.support:recyclerview-v7:${PLAY_SERVICES_VERSION}"
